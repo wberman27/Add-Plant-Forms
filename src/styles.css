@@ -1,0 +1,14 @@
+* {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.35rem;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+body {
+  color: white;
+  background-image: url("https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
+}
+.errors {
+  color: red;
+  font-size: 0.5rem;
+}
