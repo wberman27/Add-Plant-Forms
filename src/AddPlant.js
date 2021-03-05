@@ -27,16 +27,16 @@ const initialFormValues = {
   interval: "",
   img: ""
 };
-// const initialFormErrors = {
-//   //intial form errors
-//   nickname: "",
-//   species: "",
-//   date: "",
-//   time: "",
-//   frequency: "",
-//   interval: "",
-//   img: ""
-// };
+const initialFormErrors = {
+  //intial form errors
+  nickname: "",
+  species: "",
+  date: "",
+  time: "",
+  frequency: "",
+  interval: "",
+  img: ""
+};
 
 // const initialDisabled = false; //button disabled intially
 
@@ -45,7 +45,7 @@ const AddPlant = (props) => {
   const classes = useStyles();
 
   const [formValues, setFormValues] = useState(initialFormValues);
-  // const [formErrors, setFormErrors] = useState(initialFormErrors);
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
   // const [disabled, setDisabled] = useState(initialDisabled);
   // const [plant, setPlant] = useState([]);
   // const [photo, setPhoto] = useState("");
@@ -58,29 +58,29 @@ const AddPlant = (props) => {
 
 
   //Validate values with Schema using names and values of event target, set form errors object accordingly
-  // const inputChange = (name, value) => {
-  //   yup
-  //     .reach(Schema, name)
-  //     .validate(value)
-  //     .then(() => {
-  //       setFormErrors({ ...formErrors, [name]: "" });
-  //     })
-  //     .catch((err) => {
-  //       setFormErrors({ ...formErrors, [name]: err.errors[0] });
-  //     });
-  //   setFormValues({
-  //     ...formValues,
-  //     [name]: value
-  //   });
-  // };
+  const inputChange = (name, value) => {
+    yup
+      .reach(Schema, name)
+      .validate(value)
+      .then(() => {
+        setFormErrors({ ...formErrors, [name]: "" });
+      })
+      .catch((err) => {
+        setFormErrors({ ...formErrors, [name]: err.errors[0] });
+      });
+    setFormValues({
+      ...formValues,
+      [name]: value
+    });
+  };
 
 
   // //Invoke inputChange with name and value of evt.target
-  // const onChange = (evt) => {
-  //   const { name, value, type, checked } = evt.target;
-  //   const valueToUse = type === "checkbox" ? checked : value; // use valueToUse with checkbox, otherwise use value
-  //   inputChange(name, valueToUse);
-  // };
+  const onChange = (evt) => {
+    const { name, value, type, checked } = evt.target;
+    const valueToUse = type === "checkbox" ? checked : value; // use valueToUse with checkbox, otherwise use value
+    inputChange(name, valueToUse);
+  };
 
   return (
     <>
@@ -122,7 +122,7 @@ const AddPlant = (props) => {
                 type="file"
                 name="img"
                 value={formValues.img}
-                // onChange={onChange}
+                onChange={onChange}
               />
 
               <label htmlFor="icon-button-file">
@@ -145,13 +145,13 @@ const AddPlant = (props) => {
               <TextField
                 name="nickname"
                 value={formValues.nickname}
-                // onChange={onChange}
+                onChange={onChange}
                 label="Nickname"
                 variant="filled"
-                required
+                // required
                 className={classes.textNickname}
               />
-              {/* <div className="errors">{formErrors.nickname}</div> */}
+              <div className="errors">{formErrors.nickname}</div>
             </Grid>
 
             <Grid item>
@@ -160,12 +160,12 @@ const AddPlant = (props) => {
                 label="Species"
                 name="species"
                 value={formValues.species}
-                // onChange={onChange}
+                onChange={onChange}
                 variant="filled"
-                required
+                // required
                 className={classes.textSpecies}
               />
-              {/* <div className="errors">{formErrors.species}</div> */}
+              <div className="errors">{formErrors.species}</div>
             </Grid>
           
           
@@ -193,9 +193,9 @@ const AddPlant = (props) => {
 
             {/* Date and Time */}
             <Grid item className={classes.dateTime}>
-              <MaterialUIPickers value = {formValues.date} name="date" />
-              {/* onChange={onChange} */}
-              {/* <div className="errors">{formErrors.date}</div> */}
+              <MaterialUIPickers value = {formValues.date} name="date" onChange={onChange}/>
+              
+              <div className="errors">{formErrors.date}</div>
             </Grid>
 
 
@@ -209,11 +209,11 @@ const AddPlant = (props) => {
                   min="1"
                   max="31"
                   value={formValues.frequency}
-                  required
-                  // onChange={onChange}
+                  // required
+                  onChange={onChange}
                   className={classes.frequencyField}
                 />
-                {/* <div className="errors">{formErrors.frequency}</div> */}
+                <div className="errors">{formErrors.frequency}</div>
             </Grid>
 
 
@@ -221,9 +221,9 @@ const AddPlant = (props) => {
 
             <Grid item className={classes.select}>
               {/* Interval */}
-              <SimpleSelect name="interval" value={formValues.interval} />
-              {/* onChange={onChange} */}
-              {/* <div className="errors">{formErrors.interval}</div> */}
+              <SimpleSelect name="interval" value={formValues.interval} onChange={onChange}/>
+              
+              <div className="errors">{formErrors.interval}</div>
             </Grid>
           </Grid>
       </Grid>
@@ -241,13 +241,13 @@ const AddPlant = (props) => {
         >
           <Grid item>
             {/* Save */}
-            <Button variant="contained" className={classes.buttons}>Save</Button>
-            {/* onChange={onChange} */}
+            <Button variant="contained" className={classes.buttons} onChange={onChange}>Save</Button>
+
           </Grid>
           <Grid item>
             {/* Delete */}
-            <Button variant="contained" className={classes.buttons} onClick={()=>{setFormValues(initialFormValues)}}>Cancel</Button>
-            {/* onChange={onChange} */}
+            <Button variant="contained" className={classes.buttons} onChange={onChange} onClick={()=>{setFormValues(initialFormValues)}}>Cancel</Button>
+            
           </Grid>
         </Grid> 
     {/* </Grid> */}
